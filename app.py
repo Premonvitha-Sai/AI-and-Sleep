@@ -145,7 +145,7 @@ def provide_feedback(user_inputs, predicted_disorder):
     feedback = {}
 
     # General feedback based on the disorder
-    feedback['general'] = {
+    feedback['General Feed:'] = {
         "Healthy": "You are currently classified as healthy. It's important to continue monitoring and managing health factors to maintain this status.",
         "Sleep Apnea": "Management of sleep apnea is crucial to reduce health risks associated with the condition.",
         "Insomnia": "Improving sleep quality and managing stress are key to treating insomnia effectively."
