@@ -9,7 +9,7 @@ import openai
 
 
 st.set_page_config(
-        page_title="🤖AI & Sleep😴",
+        page_title="AI & Sleep",
         page_icon="👩‍⚕️",  # You can use an emoji or specify the URL for an image
        # layout="wide",
     )
@@ -125,8 +125,8 @@ def check_if_started():
 def display_emoji(disorder):
     emojis = {
         'Healthy': '😊',
-        'Sleep Apnea': '😴',
-        'Insomnia': '😪'
+        'Sleep Apnea': '😷',
+        'Insomnia': '😫'
     }
     return emojis.get(disorder, '❓')
 
