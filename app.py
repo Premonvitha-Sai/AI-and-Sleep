@@ -137,7 +137,7 @@ def get_base64_encoded_image(image_path):
         return base64.b64encode(img_file.read()).decode('utf-8')
     
 def load_model():
-    with open('sleep_model.pkl', 'rb') as file:
+    with open('sleep_gb.pkl', 'rb') as file:
         model = pickle.load(file)
     return model
 
