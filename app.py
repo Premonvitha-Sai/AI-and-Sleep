@@ -153,37 +153,35 @@ def provide_feedback(user_inputs, predicted_disorder):
 
     # Feedback for Healthy
     if predicted_disorder == "Healthy":
-        if user_inputs['age'] > 50:
-            feedback['age'] = "Being over 50 can increase your risk for several sleep disorders, including insomnia and sleep apnea."
+        if user_inputs['age'] > 50 and user_inputs['elevated_bmi'] == 1:
+            feedback['age_bmi'] = "Being over 50 with a high BMI can significantly increase your risk for sleep apnea."
         if user_inputs['sleep_duration'] < 6:
-            feedback['sleep_duration'] = "Sleeping less than 6 hours regularly might increase your risk of developing sleep-related disorders."
+            feedback['sleep_duration'] = "Sleeping less than 6 hours regularly might increase your risk of developing sleep-related disorders, including insomnia."
         if user_inputs['quality_of_sleep'] < 3:
-            feedback['quality_of_sleep'] = "Poor sleep quality can be an early sign of developing sleep conditions."
+            feedback['quality_of_sleep'] = "Poor sleep quality can be an early sign of developing sleep conditions like insomnia."
         if user_inputs['stress_level'] > 6:
             feedback['stress'] = "High stress levels are often a precursor to sleep problems; managing it is crucial."
         if user_inputs['physical_activity_level'] < 30:
             feedback['physical_activity'] = "Low physical activity is associated with poorer health outcomes, including poor sleep health."
         if user_inputs['heart_rate'] > 80:
-            feedback['heart_rate'] = "An elevated heart rate can be an indicator of stress or other health issues that may affect sleep."
+            feedback['heart_rate'] = "An elevated heart rate can be an indicator of stress or other health issues that may affect sleep, particularly sleep apnea."
         if user_inputs['daily_steps'] < 5000:
             feedback['daily_steps'] = "A low step count can be linked to lower overall health, which could impact sleep health."
-        if user_inputs['elevated_bmi'] == 1:
-            feedback['elevated_bmi'] = "An elevated BMI could predispose you to sleep apnea or other sleep disturbances."
         if user_inputs['systolic_bp'] > 135 or user_inputs['diastolic_bp'] > 85:
             feedback['blood_pressure'] = "High blood pressure is associated with many health issues, including sleep apnea."
 
     # Feedback for Sleep Apnea
     elif predicted_disorder == "Sleep Apnea":
+        if user_inputs['age'] > 50:
+            feedback['age'] = "Your age is a significant risk factor for sleep apnea."
         if user_inputs['heart_rate'] > 80:
-            feedback['heart_rate'] = "Your heart rate is higher than normal, which is commonly associated with sleep apnea."
+            feedback['heart_rate'] = "A higher than normal heart rate is commonly associated with sleep apnea."
         if user_inputs['daily_steps'] < 5000:
             feedback['daily_steps'] = "A low level of daily activity is associated with sleep apnea; increasing it may help alleviate symptoms."
         if user_inputs['elevated_bmi'] == 1:
-            feedback['elevated_bmi'] = "An elevated BMI is strongly linked to sleep apnea."
+            feedback['elevated_bmi'] = "An elevated BMI is strongly linked to sleep apnea, particularly among older adults."
         if user_inputs['systolic_bp'] > 135 or user_inputs['diastolic_bp'] > 85:
-            feedback['blood_pressure'] = "High blood pressure is often found in those with sleep apnea."
-        if user_inputs['quality_of_sleep'] < 3:
-            feedback['quality_of_sleep'] = "Poor sleep quality is a significant indicator of sleep apnea."
+            feedback['blood_pressure'] = "High blood pressure is often found in those with sleep apnea and can exacerbate the condition."
 
     # Feedback for Insomnia
     elif predicted_disorder == "Insomnia":
@@ -194,9 +192,10 @@ def provide_feedback(user_inputs, predicted_disorder):
         if user_inputs['stress_level'] > 6:
             feedback['stress'] = "High stress levels are often associated with insomnia; managing it is essential."
         if user_inputs['physical_activity_level'] < 31:
-            feedback['physical_activity'] = "Low physical activity can contribute to insomnia; increasing activity might help."
+            feedback['physical_activity'] = "Low physical activity can contribute to insomnia; increasing activity might help improve your sleep quality."
 
     return feedback
+
 
 
 def display_results(predicted_disorder, user_inputs):
@@ -293,14 +292,14 @@ def display_therapy(user_inputs, predicted_disorder):
     # Define the risk levels and corresponding therapy advice for each feature
     risk_levels = {
         'age': {'low': (19,30 ), 'moderate': (31,40), 'high': (41, 100)},
-        'sleep_duration': {'low': (7, 9), 'moderate': (5, 7), 'high': (0, 5)},
-        'quality_of_sleep': {'low': (5, 10), 'moderate': (4, 5), 'high': (1, 3)},
+        'sleep_duration': {'low': (8, 9), 'moderate': (6, 7), 'high': (0, 5)},
+        'quality_of_sleep': {'low': (7, 10), 'moderate': (4, 6), 'high': (1, 3)},
         'physical_activity_level': {'low': (60,90), 'moderate': (41, 59), 'high': (20,40)},
         'stress_level': {'low': (1, 3), 'moderate': (4,6), 'high': (7, 10)},
         'heart_rate': {'low': (60, 70), 'moderate': (70, 80), 'high': (80, 110)},
         'daily_steps': {'low': (8000, 15000), 'moderate': (5000, 7999), 'high': (0, 4999)},
-        'systolic_bp': {'low': (110, 120), 'moderate': (120, 135), 'high': (136, 180)},
-        'diastolic_bp': {'low': (70, 80), 'moderate': (80, 89), 'high': (90, 100)},
+        'systolic_bp': {'low': (110, 129), 'moderate': (130, 135), 'high': (136, 180)},
+        'diastolic_bp': {'low': (40, 60), 'moderate': (61, 89), 'high': (90, 100)},
     }
 
     therapy_advice = {
