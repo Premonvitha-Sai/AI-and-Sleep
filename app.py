@@ -299,7 +299,7 @@ def display_therapy(user_inputs, predicted_disorder):
         'heart_rate': {'low': (60, 70), 'moderate': (70, 80), 'high': (80, 110)},
         'daily_steps': {'low': (8000, 15000), 'moderate': (5000, 7999), 'high': (0, 4999)},
         'systolic_bp': {'low': (110, 129), 'moderate': (130, 135), 'high': (136, 180)},
-        'diastolic_bp': {'low': (40, 60), 'moderate': (61, 89), 'high': (90, 100)},
+        'diastolic_bp': {'low': (61, 85), 'moderate': (40, 60), 'high': (90, 100)},
     }
 
     therapy_advice = {
